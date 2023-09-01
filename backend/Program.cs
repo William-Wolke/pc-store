@@ -28,11 +28,11 @@ app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/computers", async (PcDbContext db) =>
 {
-    await db.Computers.ToListAsync();
+    return await db.Computers.ToListAsync();
 });
 app.MapGet("/computer/{id}", async (PcDbContext db, int id) =>
 {
-    await db.Computers.FindAsync(id);
+    return await db.Computers.FindAsync(id);
 });
 
 app.MapPost("/computer", async (PcDbContext db, Computer computer) => 
@@ -72,11 +72,11 @@ app.MapDelete("/computer/{id}", async (PcDbContext db, int id) =>
 
 app.MapGet("/orders", async (PcDbContext db) => 
 {
-    await db.Computers.ToListAsync();
+    return await db.Computers.ToListAsync();
 });
 app.MapGet("/order/{id}", async (PcDbContext db, int id) =>
 {
-    await db.Orders.FindAsync(id);
+    return await db.Orders.FindAsync(id);
 });
 
 app.MapPost("/order", async (PcDbContext db, Order order) =>
