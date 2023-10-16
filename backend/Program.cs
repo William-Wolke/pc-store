@@ -44,14 +44,14 @@ app.MapPost("/computer", async (PcDbContext db, Computer computer) =>
 app.MapPut("/computer/{id}", async (PcDbContext db, Computer updateComputer, int id) => 
 {
     var computer = await db.Computers.FindAsync(id);
-    if (updateComputer is null) {
+    if (computer is null || updateComputer is null) {
         return Results.NotFound();
     };
-    computer.Name = updateComputer.Name;
-    computer.Processor = updateComputer.Processor;
-    computer.GraphicsCard = updateComputer.GraphicsCard;
-    computer.Description = updateComputer.Description;
-    computer.ImageLink = updateComputer.ImageLink;
+    computer.Name = updateComputer.Name ?? computer.Name;
+    computer.Processor = updateComputer.Processor ?? computer.Processor;
+    computer.GraphicsCard = updateComputer.GraphicsCard ?? computer.GraphicsCard;
+    computer.Description = updateComputer.Description ?? computer.Description;
+    computer.ImageLink = updateComputer.ImageLink ?? computer.ImageLink;
 
     await db.SaveChangesAsync();
     return Results.NoContent();
