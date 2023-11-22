@@ -88,9 +88,9 @@ app.MapPost("/order", async (PcDbContext db, Order order) =>
 app.MapPut("/order/{id}", async (PcDbContext db, Order updateOrder, int id) => 
 {
     var order = await db.Orders.FindAsync(id);
-    if (updateOrder is null) {
+    if (order is null) {
         return Results.NotFound();
-    };
+    }
     order.CustomerName = updateOrder.CustomerName;
     order.Address = updateOrder.Address;
     order.Computers.Clear();
